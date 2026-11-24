@@ -28,6 +28,33 @@ On Windows ARM64, run the viewer with x64 Python for AVIF support. [Pillow wheel
 
 You can also pass a file path to `python -m manga_viewer` to open it at launch.
 
+## Build a Linux executable
+
+To make an x64 Linux one-file build, use a build environment with a C compiler, Python development headers, `patchelf`, and Qt's system libraries. This recipe was tested on Ubuntu 22.04.
+
+```sh
+python -m pip install . 'Nuitka==4.3.5' jsonschema zstandard
+python -m nuitka --mode=onefile --enable-plugin=pyside6 \
+  --user-package-configuration-file=nuitka-linux.nuitka-package.config.yml \
+  --include-data-files=LICENSE=LICENSE --include-module=PIL.AvifImagePlugin \
+  --output-dir=dist --output-filename=simple-manga-viewer-linux-x86_64 \
+  --remove-output nuitka_launcher.py
+```
+
+Run `dist/simple-manga-viewer-linux-x86_64` to launch the viewer. The executable includes Python, Qt, and the UnRAR fallback.
+
+To list the viewer in your file manager’s **Open With** menu, save this as `~/.local/share/applications/io.github.valkexia.SimpleMangaViewer.desktop` and replace the executable path with the absolute path to your build.
+
+```ini
+[Desktop Entry]
+Type=Application
+Name=Simple Manga Viewer
+Exec="/absolute/path/to/simple-manga-viewer-linux-x86_64" %f
+Terminal=false
+Categories=Graphics;Viewer;
+MimeType=application/vnd.comicbook+zip;application/vnd.comicbook-rar;application/x-cb7;
+```
+
 ## Reading controls
 
 Choose **Single page** or **Long strip** in the toolbar. The page slider jumps to a page in either layout. Page images and manga in the same folder are sorted naturally, so `Chapter 2` comes before `Chapter 10`.

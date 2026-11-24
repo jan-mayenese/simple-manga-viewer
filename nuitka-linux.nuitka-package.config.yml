@@ -1,0 +1,12 @@
+- module-name: 'manga_viewer'
+  data-files:
+    - patterns:
+        - 'assets/unripe-mango.png'
+        - 'vendor/unrar/linux-x86_64/LICENSE.txt'
+  dlls:
+    - from_filenames:
+        relative_path: 'vendor/unrar/linux-x86_64'
+        prefixes:
+          - 'unrar'
+        executable: 'yes'
+      when: 'linux and arch_amd64'
