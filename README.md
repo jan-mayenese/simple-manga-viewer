@@ -43,7 +43,7 @@ python -m nuitka --mode=onefile --enable-plugin=pyside6 \
 
 Run `dist/simple-manga-viewer-linux-x86_64` to launch the viewer. The executable includes Python, Qt, and the UnRAR fallback.
 
-To list the viewer in your file manager’s **Open With** menu, save this as `~/.local/share/applications/io.github.valkexia.SimpleMangaViewer.desktop` and replace the executable path with the absolute path to your build.
+To list the viewer in your file manager’s **Open With** menu, save this as `~/.local/share/applications/io.github.jan-mayenese.SimpleMangaViewer.desktop` and replace the executable path with the absolute path to your build.
 
 ```ini
 [Desktop Entry]
